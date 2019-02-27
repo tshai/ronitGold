@@ -1,0 +1,1967 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ronitGoldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticlesPics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleToArticlePics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="articleID" Type="int" Nullable="false" />
+          <Property Name="articlePicsID" Type="int" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="contactID" />
+          </Key>
+          <Property Name="contactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="message" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="date_in" Type="smalldatetime" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DomainsList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+          <Property Name="themeID" Type="int" Nullable="false" />
+          <Property Name="languageID" Type="int" Nullable="false" />
+          <Property Name="defaultPageID" Type="int" />
+          <Property Name="logo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DomainToCompanies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyID" Type="int" Nullable="false" />
+          <Property Name="domainID" Type="int" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="domainToReadySentense">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="readySentensesID" Type="int" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventPics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eventID" Type="int" Nullable="false" />
+          <Property Name="eventImage" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="engDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="eventName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="eventPlace" Type="nvarchar" MaxLength="1000" />
+          <Property Name="eventText" Type="nvarchar" MaxLength="1000" />
+          <Property Name="eventDate" Type="varchar" MaxLength="50" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inProcess">
+          <Key>
+            <PropertyRef Name="inProcessID" />
+          </Key>
+          <Property Name="inProcessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inProcessName" Type="nvarchar" MaxLength="1400" Nullable="false" />
+          <Property Name="inProcessPlace" Type="nvarchar" MaxLength="1400" />
+          <Property Name="inProcessText" Type="nvarchar" MaxLength="1400" />
+          <Property Name="inProcessDate" Type="nvarchar" MaxLength="400" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inProcessPics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inProcessID" Type="int" Nullable="false" />
+          <Property Name="inProcessImage" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="engDescription" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="localLanguage" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CurrentCulture" Type="varchar" MaxLength="50" />
+          <Property Name="direction" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Masters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="pageID" Type="int" Nullable="false" />
+          <Property Name="name" Type="int" Nullable="false" />
+          <Property Name="menuType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuToDomain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+          <Property Name="linkName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="menuType" Type="int" Nullable="false" />
+          <Property Name="pageID" Type="int" Nullable="false" />
+          <Property Name="isInternal" Type="int" Nullable="false" />
+          <Property Name="apperOrder" Type="int" Nullable="false" />
+          <Property Name="PageTitle" Type="nvarchar(max)" />
+          <Property Name="visibility" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pageLink" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paints">
+          <Key>
+            <PropertyRef Name="paintID" />
+          </Key>
+          <Property Name="paintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paintName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="paintDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="paintSize" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="paintImage" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="engName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="engDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isMain" Type="bit" Nullable="false" />
+          <Property Name="remarks" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="isSold" Type="bit" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+          <Property Name="category" Type="int" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="projectsID" />
+          </Key>
+          <Property Name="projectsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectsName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="projectsPlace" Type="nvarchar" MaxLength="1000" />
+          <Property Name="projectsText" Type="nvarchar" MaxLength="1000" />
+          <Property Name="projectsDate" Type="varchar" MaxLength="50" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="projectsPics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectsID" Type="int" Nullable="false" />
+          <Property Name="projectsImage" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="engDescription" Type="nvarchar(max)" />
+          <Property Name="dateIn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ReadySentenses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+          <Property Name="textKey" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteMessages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="dateIn" Type="datetime" Nullable="false" />
+          <Property Name="dataType" Type="int" />
+        </EntityType>
+        <EntityType Name="SiteMessagesToLanguages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="siteMessageID" Type="int" />
+          <Property Name="languageID" Type="int" />
+          <Property Name="dateIn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Texts">
+          <Key>
+            <PropertyRef Name="textID" />
+          </Key>
+          <Property Name="textID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="textName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="domainListID" Type="int" Nullable="false" />
+          <Property Name="imageFile" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="masterPageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThemeJS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="themeID" Type="int" Nullable="false" />
+          <Property Name="fileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isInternal" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThemePics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="themeID" Type="int" Nullable="false" />
+          <Property Name="pageID" Type="int" Nullable="false" />
+          <Property Name="imgID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="domainListID" Type="int" />
+          <Property Name="dateIn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ThemeToMasters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="themeID" Type="int" Nullable="false" />
+          <Property Name="masterID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Articles_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArticlesPics_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="ArticlesPics" Type="Self.ArticlesPics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ArticlesPics">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contacts">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainsList_Languages">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainsList">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainsList_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainsList">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainToCompanies_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="DomainToCompanies" Type="Self.DomainToCompanies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainToCompanies">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainToCompanies_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="DomainToCompanies" Type="Self.DomainToCompanies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainToCompanies">
+              <PropertyRef Name="domainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_domainToReadySentense_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="domainToReadySentense" Type="Self.domainToReadySentense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="domainToReadySentense">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_domainToReadySentense_ReadySentenses">
+          <End Role="ReadySentenses" Type="Self.ReadySentenses" Multiplicity="1" />
+          <End Role="domainToReadySentense" Type="Self.domainToReadySentense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReadySentenses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="domainToReadySentense">
+              <PropertyRef Name="readySentensesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Events">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inProcessPics_inProcess">
+          <End Role="inProcess" Type="Self.inProcess" Multiplicity="1" />
+          <End Role="inProcessPics" Type="Self.inProcessPics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inProcess">
+              <PropertyRef Name="inProcessID" />
+            </Principal>
+            <Dependent Role="inProcessPics">
+              <PropertyRef Name="inProcessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_SiteMessages">
+          <End Role="SiteMessages" Type="Self.SiteMessages" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMessages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="menuType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuToDomain_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="MenuToDomain" Type="Self.MenuToDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuToDomain">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projects_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="1" />
+          <End Role="projects" Type="Self.projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="projects">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReadySentenses_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="ReadySentenses" Type="Self.ReadySentenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReadySentenses">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiteMessagesToLanguages_Languages">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+          <End Role="SiteMessagesToLanguages" Type="Self.SiteMessagesToLanguages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiteMessagesToLanguages">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiteMessagesToLanguages_SiteMessages">
+          <End Role="SiteMessages" Type="Self.SiteMessages" Multiplicity="0..1" />
+          <End Role="SiteMessagesToLanguages" Type="Self.SiteMessagesToLanguages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMessages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiteMessagesToLanguages">
+              <PropertyRef Name="siteMessageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_Articles">
+          <End Role="Articles" Type="Self.Articles" Multiplicity="1" />
+          <End Role="ArticleToArticlePics" Type="Self.ArticleToArticlePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ArticleToArticlePics">
+              <PropertyRef Name="articleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_ArticlesPics">
+          <End Role="ArticlesPics" Type="Self.ArticlesPics" Multiplicity="1" />
+          <End Role="ArticleToArticlePics" Type="Self.ArticleToArticlePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticlesPics">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ArticleToArticlePics">
+              <PropertyRef Name="articlePicsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Theme_Masters">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="1" />
+          <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="masterPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeJS_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="ThemeJS" Type="Self.ThemeJS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemeJS">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemePics_DomainsList">
+          <End Role="DomainsList" Type="Self.DomainsList" Multiplicity="0..1" />
+          <End Role="ThemePics" Type="Self.ThemePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemePics">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemePics_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="ThemePics" Type="Self.ThemePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemePics">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemePics_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="ThemePics" Type="Self.ThemePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemePics">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeToMasters_Masters">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="1" />
+          <End Role="ThemeToMasters" Type="Self.ThemeToMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemeToMasters">
+              <PropertyRef Name="masterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeToMasters_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="ThemeToMasters" Type="Self.ThemeToMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemeToMasters">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ronitGoldModelStoreContainer">
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticlesPics" EntityType="Self.ArticlesPics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleToArticlePics" EntityType="Self.ArticleToArticlePics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DomainsList" EntityType="Self.DomainsList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DomainToCompanies" EntityType="Self.DomainToCompanies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="domainToReadySentense" EntityType="Self.domainToReadySentense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="eventPics" EntityType="Self.eventPics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inProcess" EntityType="Self.inProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inProcessPics" EntityType="Self.inProcessPics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masters" EntityType="Self.Masters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuToDomain" EntityType="Self.MenuToDomain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paints" EntityType="Self.Paints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="projects" EntityType="Self.projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="projectsPics" EntityType="Self.projectsPics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReadySentenses" EntityType="Self.ReadySentenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteMessages" EntityType="Self.SiteMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteMessagesToLanguages" EntityType="Self.SiteMessagesToLanguages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Texts" EntityType="Self.Texts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThemeJS" EntityType="Self.ThemeJS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThemePics" EntityType="Self.ThemePics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThemeToMasters" EntityType="Self.ThemeToMasters" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articles_DomainsList" Association="Self.FK_Articles_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArticlesPics_DomainsList" Association="Self.FK_ArticlesPics_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="ArticlesPics" EntitySet="ArticlesPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_DomainsList" Association="Self.FK_Contacts_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Contacts" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainsList_Languages" Association="Self.FK_DomainsList_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="DomainsList" EntitySet="DomainsList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainsList_Theme" Association="Self.FK_DomainsList_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="DomainsList" EntitySet="DomainsList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainToCompanies_Companies" Association="Self.FK_DomainToCompanies_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="DomainToCompanies" EntitySet="DomainToCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainToCompanies_DomainsList" Association="Self.FK_DomainToCompanies_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="DomainToCompanies" EntitySet="DomainToCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_domainToReadySentense_DomainsList" Association="Self.FK_domainToReadySentense_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="domainToReadySentense" EntitySet="domainToReadySentense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_domainToReadySentense_ReadySentenses" Association="Self.FK_domainToReadySentense_ReadySentenses">
+            <End Role="ReadySentenses" EntitySet="ReadySentenses" />
+            <End Role="domainToReadySentense" EntitySet="domainToReadySentense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Events" Association="Self.FK_Events_Events">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inProcessPics_inProcess" Association="Self.FK_inProcessPics_inProcess">
+            <End Role="inProcess" EntitySet="inProcess" />
+            <End Role="inProcessPics" EntitySet="inProcessPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_SiteMessages" Association="Self.FK_Menus_SiteMessages">
+            <End Role="SiteMessages" EntitySet="SiteMessages" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuToDomain_Pages" Association="Self.FK_MenuToDomain_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="MenuToDomain" EntitySet="MenuToDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projects_DomainsList" Association="Self.FK_projects_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReadySentenses_Pages" Association="Self.FK_ReadySentenses_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="ReadySentenses" EntitySet="ReadySentenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiteMessagesToLanguages_Languages" Association="Self.FK_SiteMessagesToLanguages_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="SiteMessagesToLanguages" EntitySet="SiteMessagesToLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiteMessagesToLanguages_SiteMessages" Association="Self.FK_SiteMessagesToLanguages_SiteMessages">
+            <End Role="SiteMessages" EntitySet="SiteMessages" />
+            <End Role="SiteMessagesToLanguages" EntitySet="SiteMessagesToLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_Articles" Association="Self.FK_Table_1_Articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="ArticleToArticlePics" EntitySet="ArticleToArticlePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_ArticlesPics" Association="Self.FK_Table_1_ArticlesPics">
+            <End Role="ArticlesPics" EntitySet="ArticlesPics" />
+            <End Role="ArticleToArticlePics" EntitySet="ArticleToArticlePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Theme_Masters" Association="Self.FK_Theme_Masters">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="Theme" EntitySet="Theme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeJS_Theme" Association="Self.FK_ThemeJS_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="ThemeJS" EntitySet="ThemeJS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemePics_DomainsList" Association="Self.FK_ThemePics_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="ThemePics" EntitySet="ThemePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemePics_Pages" Association="Self.FK_ThemePics_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="ThemePics" EntitySet="ThemePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemePics_Theme" Association="Self.FK_ThemePics_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="ThemePics" EntitySet="ThemePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeToMasters_Masters" Association="Self.FK_ThemeToMasters_Masters">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="ThemeToMasters" EntitySet="ThemeToMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeToMasters_Theme" Association="Self.FK_ThemeToMasters_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="ThemeToMasters" EntitySet="ThemeToMasters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ronitGoldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="companyGuid" Type="Guid" Nullable="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DomainToCompanies" Relationship="Self.FK_DomainToCompanies_Companies" FromRole="Companies" ToRole="DomainToCompanies" />
+        </EntityType>
+        <EntityType Name="DomainToCompanies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyID" Type="Int32" Nullable="false" />
+          <Property Name="domainID" Type="Int32" Nullable="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK_DomainToCompanies_Companies" FromRole="DomainToCompanies" ToRole="Companies" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_DomainToCompanies_DomainsList" FromRole="DomainToCompanies" ToRole="DomainsList" />
+        </EntityType>
+        <EntityType Name="domainToReadySentense">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="readySentensesID" Type="Int32" Nullable="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReadySentenses" Relationship="Self.FK_domainToReadySentense_ReadySentenses" FromRole="domainToReadySentense" ToRole="ReadySentenses" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_domainToReadySentense_DomainsList" FromRole="domainToReadySentense" ToRole="DomainsList" />
+        </EntityType>
+        <EntityType Name="eventPics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventID" Type="Int32" Nullable="false" />
+          <Property Name="eventImage" Type="String" MaxLength="500" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="engDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inProcessPics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inProcessID" Type="Int32" Nullable="false" />
+          <Property Name="inProcessImage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="engDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="inProcess" Relationship="ronitGoldModel.FK_inProcessPics_inProcess" FromRole="inProcessPics" ToRole="inProcess" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="localLanguage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentCulture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="direction" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SiteMessagesToLanguages" Relationship="Self.FK_SiteMessagesToLanguages_Languages" FromRole="Languages" ToRole="SiteMessagesToLanguages" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_DomainsList_Languages" FromRole="Languages" ToRole="DomainsList" />
+        </EntityType>
+        <EntityType Name="Masters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Theme" Relationship="Self.FK_Theme_Masters" FromRole="Masters" ToRole="Theme" />
+          <NavigationProperty Name="ThemeToMasters" Relationship="Self.FK_ThemeToMasters_Masters" FromRole="Masters" ToRole="ThemeToMasters" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="pageID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="Int32" Nullable="false" />
+          <Property Name="menuType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_Menus_Pages" FromRole="Menus" ToRole="Pages" />
+          <NavigationProperty Name="SiteMessages" Relationship="Self.FK_Menus_SiteMessages" FromRole="Menus" ToRole="SiteMessages" />
+          <NavigationProperty Name="SiteMessages1" Relationship="Self.FK_Menus_SiteMessages1" FromRole="Menus" ToRole="SiteMessages" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pageLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_Pages" FromRole="Pages" ToRole="Menus" />
+          <NavigationProperty Name="ReadySentenses" Relationship="Self.FK_ReadySentenses_Pages" FromRole="Pages" ToRole="ReadySentenses" />
+          <NavigationProperty Name="ThemePics" Relationship="Self.FK_ThemePics_Pages" FromRole="Pages" ToRole="ThemePics" />
+          <NavigationProperty Name="MenuToDomain" Relationship="ronitGoldModel.FK_MenuToDomain_Pages" FromRole="Pages" ToRole="MenuToDomain" />
+        </EntityType>
+        <EntityType Name="projectsPics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectsID" Type="Int32" Nullable="false" />
+          <Property Name="projectsImage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="engDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateIn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ReadySentenses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="textKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="domainToReadySentense" Relationship="Self.FK_domainToReadySentense_ReadySentenses" FromRole="ReadySentenses" ToRole="domainToReadySentense" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_ReadySentenses_Pages" FromRole="ReadySentenses" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="SiteMessages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="message" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dataType" Type="Int32" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Menus_SiteMessages" FromRole="SiteMessages" ToRole="Menus" />
+          <NavigationProperty Name="Menus1" Relationship="Self.FK_Menus_SiteMessages1" FromRole="SiteMessages" ToRole="Menus" />
+          <NavigationProperty Name="SiteMessagesToLanguages" Relationship="Self.FK_SiteMessagesToLanguages_SiteMessages" FromRole="SiteMessages" ToRole="SiteMessagesToLanguages" />
+          <NavigationProperty Name="MenuToDomain" Relationship="ronitGoldModel.FK_MenuToDomain_SiteMessages" FromRole="SiteMessages" ToRole="MenuToDomain" />
+        </EntityType>
+        <EntityType Name="SiteMessagesToLanguages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="siteMessageID" Type="Int32" />
+          <Property Name="languageID" Type="Int32" />
+          <Property Name="dateIn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Languages" Relationship="Self.FK_SiteMessagesToLanguages_Languages" FromRole="SiteMessagesToLanguages" ToRole="Languages" />
+          <NavigationProperty Name="SiteMessages" Relationship="Self.FK_SiteMessagesToLanguages_SiteMessages" FromRole="SiteMessagesToLanguages" ToRole="SiteMessages" />
+        </EntityType>
+        <EntityType Name="Texts">
+          <Key>
+            <PropertyRef Name="textID" />
+          </Key>
+          <Property Name="textID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="textName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <Property Name="imageFile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="masterPageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Masters" Relationship="Self.FK_Theme_Masters" FromRole="Theme" ToRole="Masters" />
+          <NavigationProperty Name="ThemeJS" Relationship="Self.FK_ThemeJS_Theme" FromRole="Theme" ToRole="ThemeJS" />
+          <NavigationProperty Name="ThemePics" Relationship="Self.FK_ThemePics_Theme" FromRole="Theme" ToRole="ThemePics" />
+          <NavigationProperty Name="ThemeToMasters" Relationship="Self.FK_ThemeToMasters_Theme" FromRole="Theme" ToRole="ThemeToMasters" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_DomainsList_Theme" FromRole="Theme" ToRole="DomainsList" />
+        </EntityType>
+        <EntityType Name="ThemeJS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="themeID" Type="Int32" Nullable="false" />
+          <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isInternal" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Theme" Relationship="Self.FK_ThemeJS_Theme" FromRole="ThemeJS" ToRole="Theme" />
+        </EntityType>
+        <EntityType Name="ThemePics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="themeID" Type="Int32" Nullable="false" />
+          <Property Name="pageID" Type="Int32" Nullable="false" />
+          <Property Name="imgID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_ThemePics_Pages" FromRole="ThemePics" ToRole="Pages" />
+          <NavigationProperty Name="Theme" Relationship="Self.FK_ThemePics_Theme" FromRole="ThemePics" ToRole="Theme" />
+          <Property Name="domainListID" Type="Int32" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_ThemePics_DomainsList" FromRole="ThemePics" ToRole="DomainsList" />
+          <Property Name="dateIn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ThemeToMasters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="themeID" Type="Int32" Nullable="false" />
+          <Property Name="masterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Masters" Relationship="Self.FK_ThemeToMasters_Masters" FromRole="ThemeToMasters" ToRole="Masters" />
+          <NavigationProperty Name="Theme" Relationship="Self.FK_ThemeToMasters_Theme" FromRole="ThemeToMasters" ToRole="Theme" />
+        </EntityType>
+        <Association Name="FK_DomainToCompanies_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="DomainToCompanies" Type="Self.DomainToCompanies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainToCompanies">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_domainToReadySentense_ReadySentenses">
+          <End Role="ReadySentenses" Type="Self.ReadySentenses" Multiplicity="1" />
+          <End Role="domainToReadySentense" Type="Self.domainToReadySentense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReadySentenses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="domainToReadySentense">
+              <PropertyRef Name="readySentensesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiteMessagesToLanguages_Languages">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+          <End Role="SiteMessagesToLanguages" Type="Self.SiteMessagesToLanguages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiteMessagesToLanguages">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Theme_Masters">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="1" />
+          <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="masterPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeToMasters_Masters">
+          <End Role="Masters" Type="Self.Masters" Multiplicity="1" />
+          <End Role="ThemeToMasters" Type="Self.ThemeToMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemeToMasters">
+              <PropertyRef Name="masterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_SiteMessages">
+          <End Role="SiteMessages" Type="Self.SiteMessages" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMessages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="menuType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_SiteMessages1">
+          <End Role="SiteMessages" Type="Self.SiteMessages" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMessages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReadySentenses_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="ReadySentenses" Type="Self.ReadySentenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReadySentenses">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemePics_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="ThemePics" Type="Self.ThemePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemePics">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiteMessagesToLanguages_SiteMessages">
+          <End Role="SiteMessages" Type="Self.SiteMessages" Multiplicity="0..1" />
+          <End Role="SiteMessagesToLanguages" Type="Self.SiteMessagesToLanguages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMessages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SiteMessagesToLanguages">
+              <PropertyRef Name="siteMessageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeJS_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="ThemeJS" Type="Self.ThemeJS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemeJS">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemePics_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="ThemePics" Type="Self.ThemePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemePics">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeToMasters_Theme">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="ThemeToMasters" Type="Self.ThemeToMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemeToMasters">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Companies" />
+          <EntitySet Name="DomainToCompanies" EntityType="Self.DomainToCompanies" />
+          <EntitySet Name="domainToReadySentense" EntityType="Self.domainToReadySentense" />
+          <EntitySet Name="eventPics" EntityType="Self.eventPics" />
+          <EntitySet Name="inProcessPics" EntityType="Self.inProcessPics" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" />
+          <EntitySet Name="Masters" EntityType="Self.Masters" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" />
+          <EntitySet Name="projectsPics" EntityType="Self.projectsPics" />
+          <EntitySet Name="ReadySentenses" EntityType="Self.ReadySentenses" />
+          <EntitySet Name="SiteMessages" EntityType="Self.SiteMessages" />
+          <EntitySet Name="SiteMessagesToLanguages" EntityType="Self.SiteMessagesToLanguages" />
+          <EntitySet Name="Texts" EntityType="Self.Texts" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" />
+          <EntitySet Name="ThemeJS" EntityType="Self.ThemeJS" />
+          <EntitySet Name="ThemePics" EntityType="Self.ThemePics" />
+          <EntitySet Name="ThemeToMasters" EntityType="Self.ThemeToMasters" />
+          <AssociationSet Name="FK_DomainToCompanies_Companies" Association="Self.FK_DomainToCompanies_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="DomainToCompanies" EntitySet="DomainToCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_domainToReadySentense_ReadySentenses" Association="Self.FK_domainToReadySentense_ReadySentenses">
+            <End Role="ReadySentenses" EntitySet="ReadySentenses" />
+            <End Role="domainToReadySentense" EntitySet="domainToReadySentense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiteMessagesToLanguages_Languages" Association="Self.FK_SiteMessagesToLanguages_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="SiteMessagesToLanguages" EntitySet="SiteMessagesToLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Theme_Masters" Association="Self.FK_Theme_Masters">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="Theme" EntitySet="Theme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeToMasters_Masters" Association="Self.FK_ThemeToMasters_Masters">
+            <End Role="Masters" EntitySet="Masters" />
+            <End Role="ThemeToMasters" EntitySet="ThemeToMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Pages" Association="Self.FK_Menus_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_SiteMessages" Association="Self.FK_Menus_SiteMessages">
+            <End Role="SiteMessages" EntitySet="SiteMessages" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_SiteMessages1" Association="Self.FK_Menus_SiteMessages1">
+            <End Role="SiteMessages" EntitySet="SiteMessages" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReadySentenses_Pages" Association="Self.FK_ReadySentenses_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="ReadySentenses" EntitySet="ReadySentenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemePics_Pages" Association="Self.FK_ThemePics_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="ThemePics" EntitySet="ThemePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiteMessagesToLanguages_SiteMessages" Association="Self.FK_SiteMessagesToLanguages_SiteMessages">
+            <End Role="SiteMessages" EntitySet="SiteMessages" />
+            <End Role="SiteMessagesToLanguages" EntitySet="SiteMessagesToLanguages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeJS_Theme" Association="Self.FK_ThemeJS_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="ThemeJS" EntitySet="ThemeJS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemePics_Theme" Association="Self.FK_ThemePics_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="ThemePics" EntitySet="ThemePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeToMasters_Theme" Association="Self.FK_ThemeToMasters_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="ThemeToMasters" EntitySet="ThemeToMasters" />
+          </AssociationSet>
+          <EntitySet Name="MenuToDomain" EntityType="ronitGoldModel.MenuToDomain" />
+          <AssociationSet Name="FK_MenuToDomain_Pages" Association="ronitGoldModel.FK_MenuToDomain_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="MenuToDomain" EntitySet="MenuToDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuToDomain_SiteMessages" Association="ronitGoldModel.FK_MenuToDomain_SiteMessages">
+            <End Role="SiteMessages" EntitySet="SiteMessages" />
+            <End Role="MenuToDomain" EntitySet="MenuToDomain" />
+          </AssociationSet>
+          <EntitySet Name="DomainsList" EntityType="ronitGoldModel.DomainsList" />
+          <EntitySet Name="Events" EntityType="ronitGoldModel.Events" />
+          <EntitySet Name="inProcess" EntityType="ronitGoldModel.inProcess" />
+          <EntitySet Name="Paints" EntityType="ronitGoldModel.Paints" />
+          <EntitySet Name="projects" EntityType="ronitGoldModel.projects" />
+          <AssociationSet Name="FK_DomainsList_Languages" Association="ronitGoldModel.FK_DomainsList_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="DomainsList" EntitySet="DomainsList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainsList_Theme" Association="ronitGoldModel.FK_DomainsList_Theme">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="DomainsList" EntitySet="DomainsList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DomainToCompanies_DomainsList" Association="ronitGoldModel.FK_DomainToCompanies_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="DomainToCompanies" EntitySet="DomainToCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_domainToReadySentense_DomainsList" Association="ronitGoldModel.FK_domainToReadySentense_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="domainToReadySentense" EntitySet="domainToReadySentense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_DomainsList" Association="ronitGoldModel.FK_Events_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inProcess_DomainsList" Association="ronitGoldModel.FK_inProcess_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="inProcess" EntitySet="inProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuToDomain_Pages1" Association="ronitGoldModel.FK_MenuToDomain_Pages1">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="MenuToDomain" EntitySet="MenuToDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paints_DomainsList" Association="ronitGoldModel.FK_Paints_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Paints" EntitySet="Paints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projects_DomainsList" Association="ronitGoldModel.FK_projects_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="ronitGoldModel.Contacts" />
+          <AssociationSet Name="FK_Contacts_DomainsList" Association="ronitGoldModel.FK_Contacts_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Contacts" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inProcessPics_inProcess" Association="ronitGoldModel.FK_inProcessPics_inProcess">
+            <End Role="inProcess" EntitySet="inProcess" />
+            <End Role="inProcessPics" EntitySet="inProcessPics" />
+          </AssociationSet>
+          <EntitySet Name="Articles" EntityType="ronitGoldModel.Articles" />
+          <AssociationSet Name="FK_Articles_DomainsList" Association="ronitGoldModel.FK_Articles_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <EntitySet Name="ArticlesPics" EntityType="ronitGoldModel.ArticlesPics" />
+          <AssociationSet Name="FK_ArticlesPics_DomainsList" Association="ronitGoldModel.FK_ArticlesPics_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="ArticlesPics" EntitySet="ArticlesPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemePics_DomainsList" Association="ronitGoldModel.FK_ThemePics_DomainsList">
+            <End Role="DomainsList" EntitySet="DomainsList" />
+            <End Role="ThemePics" EntitySet="ThemePics" />
+          </AssociationSet>
+          <EntitySet Name="ArticleToArticlePics" EntityType="ronitGoldModel.ArticleToArticlePics" />
+          <AssociationSet Name="FK_Table_1_Articles" Association="ronitGoldModel.FK_Table_1_Articles">
+            <End Role="Articles" EntitySet="Articles" />
+            <End Role="ArticleToArticlePics" EntitySet="ArticleToArticlePics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_ArticlesPics" Association="ronitGoldModel.FK_Table_1_ArticlesPics">
+            <End Role="ArticlesPics" EntitySet="ArticlesPics" />
+            <End Role="ArticleToArticlePics" EntitySet="ArticleToArticlePics" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="MenuToDomain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <Property Name="linkName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="menuType" Type="Int32" Nullable="false" />
+          <Property Name="pageID" Type="Int32" Nullable="false" />
+          <Property Name="isInternal" Type="Int32" Nullable="false" />
+          <Property Name="apperOrder" Type="Int32" Nullable="false" />
+          <Property Name="PageTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pages" Relationship="ronitGoldModel.FK_MenuToDomain_Pages" FromRole="MenuToDomain" ToRole="Pages" />
+          <NavigationProperty Name="SiteMessages" Relationship="ronitGoldModel.FK_MenuToDomain_SiteMessages" FromRole="MenuToDomain" ToRole="SiteMessages" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_MenuToDomain_Pages1" FromRole="MenuToDomain" ToRole="DomainsList" />
+          <Property Name="visibility" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MenuToDomain_Pages">
+          <End Type="ronitGoldModel.Pages" Role="Pages" Multiplicity="1" />
+          <End Type="ronitGoldModel.MenuToDomain" Role="MenuToDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuToDomain">
+              <PropertyRef Name="pageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuToDomain_SiteMessages">
+          <End Type="ronitGoldModel.SiteMessages" Role="SiteMessages" Multiplicity="1" />
+          <End Type="ronitGoldModel.MenuToDomain" Role="MenuToDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMessages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuToDomain">
+              <PropertyRef Name="menuType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DomainsList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="themeID" Type="Int32" Nullable="false" />
+          <Property Name="languageID" Type="Int32" Nullable="false" />
+          <Property Name="defaultPageID" Type="Int32" />
+          <Property Name="logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Languages" Relationship="ronitGoldModel.FK_DomainsList_Languages" FromRole="DomainsList" ToRole="Languages" />
+          <NavigationProperty Name="Theme" Relationship="ronitGoldModel.FK_DomainsList_Theme" FromRole="DomainsList" ToRole="Theme" />
+          <NavigationProperty Name="DomainToCompanies" Relationship="ronitGoldModel.FK_DomainToCompanies_DomainsList" FromRole="DomainsList" ToRole="DomainToCompanies" />
+          <NavigationProperty Name="domainToReadySentense" Relationship="ronitGoldModel.FK_domainToReadySentense_DomainsList" FromRole="DomainsList" ToRole="domainToReadySentense" />
+          <NavigationProperty Name="Events" Relationship="ronitGoldModel.FK_Events_DomainsList" FromRole="DomainsList" ToRole="Events" />
+          <NavigationProperty Name="inProcess" Relationship="ronitGoldModel.FK_inProcess_DomainsList" FromRole="DomainsList" ToRole="inProcess" />
+          <NavigationProperty Name="MenuToDomain" Relationship="ronitGoldModel.FK_MenuToDomain_Pages1" FromRole="DomainsList" ToRole="MenuToDomain" />
+          <NavigationProperty Name="Paints" Relationship="ronitGoldModel.FK_Paints_DomainsList" FromRole="DomainsList" ToRole="Paints" />
+          <NavigationProperty Name="projects" Relationship="ronitGoldModel.FK_projects_DomainsList" FromRole="DomainsList" ToRole="projects" />
+          <NavigationProperty Name="Contacts" Relationship="ronitGoldModel.FK_Contacts_DomainsList" FromRole="DomainsList" ToRole="Contacts" />
+          <NavigationProperty Name="Articles" Relationship="ronitGoldModel.FK_Articles_DomainsList" FromRole="DomainsList" ToRole="Articles" />
+          <NavigationProperty Name="ArticlesPics" Relationship="ronitGoldModel.FK_ArticlesPics_DomainsList" FromRole="DomainsList" ToRole="ArticlesPics" />
+          <NavigationProperty Name="ThemePics" Relationship="ronitGoldModel.FK_ThemePics_DomainsList" FromRole="DomainsList" ToRole="ThemePics" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="eventID" />
+          </Key>
+          <Property Name="eventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eventName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="eventPlace" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="eventText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="eventDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_Events_DomainsList" FromRole="Events" ToRole="DomainsList" />
+        </EntityType>
+        <EntityType Name="inProcess">
+          <Key>
+            <PropertyRef Name="inProcessID" />
+          </Key>
+          <Property Name="inProcessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inProcessName" Type="String" Nullable="false" MaxLength="1400" FixedLength="false" Unicode="true" />
+          <Property Name="inProcessPlace" Type="String" MaxLength="1400" FixedLength="false" Unicode="true" />
+          <Property Name="inProcessText" Type="String" MaxLength="1400" FixedLength="false" Unicode="true" />
+          <Property Name="inProcessDate" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_inProcess_DomainsList" FromRole="inProcess" ToRole="DomainsList" />
+          <NavigationProperty Name="inProcessPics" Relationship="ronitGoldModel.FK_inProcessPics_inProcess" FromRole="inProcess" ToRole="inProcessPics" />
+        </EntityType>
+        <EntityType Name="Paints">
+          <Key>
+            <PropertyRef Name="paintID" />
+          </Key>
+          <Property Name="paintID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paintName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paintDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paintSize" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="paintImage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="engName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="engDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isMain" Type="Boolean" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="isSold" Type="Boolean" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <Property Name="category" Type="Int32" Nullable="false" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_Paints_DomainsList" FromRole="Paints" ToRole="DomainsList" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="projectsID" />
+          </Key>
+          <Property Name="projectsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectsName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="projectsPlace" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="projectsText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="projectsDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_projects_DomainsList" FromRole="projects" ToRole="DomainsList" />
+        </EntityType>
+        <Association Name="FK_DomainsList_Languages">
+          <End Type="ronitGoldModel.Languages" Role="Languages" Multiplicity="1" />
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainsList">
+              <PropertyRef Name="languageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainsList_Theme">
+          <End Type="ronitGoldModel.Theme" Role="Theme" Multiplicity="1" />
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainsList">
+              <PropertyRef Name="themeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DomainToCompanies_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.DomainToCompanies" Role="DomainToCompanies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainToCompanies">
+              <PropertyRef Name="domainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_domainToReadySentense_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.domainToReadySentense" Role="domainToReadySentense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="domainToReadySentense">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.Events" Role="Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inProcess_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.inProcess" Role="inProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="inProcess">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuToDomain_Pages1">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.MenuToDomain" Role="MenuToDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuToDomain">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paints_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.Paints" Role="Paints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Paints">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projects_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.projects" Role="projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="projects">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="contactID" />
+          </Key>
+          <Property Name="contactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="date_in" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_Contacts_DomainsList" FromRole="Contacts" ToRole="DomainsList" />
+        </EntityType>
+        <Association Name="FK_Contacts_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.Contacts" Role="Contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contacts">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inProcessPics_inProcess">
+          <End Type="ronitGoldModel.inProcess" Role="inProcess" Multiplicity="1" />
+          <End Type="ronitGoldModel.inProcessPics" Role="inProcessPics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inProcess">
+              <PropertyRef Name="inProcessID" />
+            </Principal>
+            <Dependent Role="inProcessPics">
+              <PropertyRef Name="inProcessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_Articles_DomainsList" FromRole="Articles" ToRole="DomainsList" />
+          <NavigationProperty Name="ArticleToArticlePics" Relationship="ronitGoldModel.FK_Table_1_Articles" FromRole="Articles" ToRole="ArticleToArticlePics" />
+        </EntityType>
+        <Association Name="FK_Articles_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.Articles" Role="Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ArticlesPics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="domainListID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DomainsList" Relationship="ronitGoldModel.FK_ArticlesPics_DomainsList" FromRole="ArticlesPics" ToRole="DomainsList" />
+          <NavigationProperty Name="ArticleToArticlePics" Relationship="ronitGoldModel.FK_Table_1_ArticlesPics" FromRole="ArticlesPics" ToRole="ArticleToArticlePics" />
+        </EntityType>
+        <Association Name="FK_ArticlesPics_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="1" />
+          <End Type="ronitGoldModel.ArticlesPics" Role="ArticlesPics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ArticlesPics">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemePics_DomainsList">
+          <End Type="ronitGoldModel.DomainsList" Role="DomainsList" Multiplicity="0..1" />
+          <End Type="ronitGoldModel.ThemePics" Role="ThemePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DomainsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThemePics">
+              <PropertyRef Name="domainListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ArticleToArticlePics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="articleID" Type="Int32" Nullable="false" />
+          <Property Name="articlePicsID" Type="Int32" Nullable="false" />
+          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Articles" Relationship="ronitGoldModel.FK_Table_1_Articles" FromRole="ArticleToArticlePics" ToRole="Articles" />
+          <NavigationProperty Name="ArticlesPics" Relationship="ronitGoldModel.FK_Table_1_ArticlesPics" FromRole="ArticleToArticlePics" ToRole="ArticlesPics" />
+        </EntityType>
+        <Association Name="FK_Table_1_Articles">
+          <End Type="ronitGoldModel.Articles" Role="Articles" Multiplicity="1" />
+          <End Type="ronitGoldModel.ArticleToArticlePics" Role="ArticleToArticlePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ArticleToArticlePics">
+              <PropertyRef Name="articleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_ArticlesPics">
+          <End Type="ronitGoldModel.ArticlesPics" Role="ArticlesPics" Multiplicity="1" />
+          <End Type="ronitGoldModel.ArticleToArticlePics" Role="ArticleToArticlePics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticlesPics">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ArticleToArticlePics">
+              <PropertyRef Name="articlePicsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ronitGoldModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="ronitGoldModel.Companies">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="companyGuid" ColumnName="companyGuid" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DomainToCompanies">
+            <EntityTypeMapping TypeName="ronitGoldModel.DomainToCompanies">
+              <MappingFragment StoreEntitySet="DomainToCompanies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="domainID" ColumnName="domainID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="domainToReadySentense">
+            <EntityTypeMapping TypeName="ronitGoldModel.domainToReadySentense">
+              <MappingFragment StoreEntitySet="domainToReadySentense">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="readySentensesID" ColumnName="readySentensesID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventPics">
+            <EntityTypeMapping TypeName="ronitGoldModel.eventPics">
+              <MappingFragment StoreEntitySet="eventPics">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="eventImage" ColumnName="eventImage" />
+                <ScalarProperty Name="engDescription" ColumnName="engDescription" />
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inProcessPics">
+            <EntityTypeMapping TypeName="ronitGoldModel.inProcessPics">
+              <MappingFragment StoreEntitySet="inProcessPics">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="inProcessID" ColumnName="inProcessID" />
+                <ScalarProperty Name="inProcessImage" ColumnName="inProcessImage" />
+                <ScalarProperty Name="engDescription" ColumnName="engDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="ronitGoldModel.Languages">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="localLanguage" ColumnName="localLanguage" />
+                <ScalarProperty Name="CurrentCulture" ColumnName="CurrentCulture" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masters">
+            <EntityTypeMapping TypeName="ronitGoldModel.Masters">
+              <MappingFragment StoreEntitySet="Masters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="ronitGoldModel.Menus">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="pageID" ColumnName="pageID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="menuType" ColumnName="menuType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="ronitGoldModel.Pages">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="pageLink" ColumnName="pageLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projectsPics">
+            <EntityTypeMapping TypeName="ronitGoldModel.projectsPics">
+              <MappingFragment StoreEntitySet="projectsPics">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="projectsID" ColumnName="projectsID" />
+                <ScalarProperty Name="projectsImage" ColumnName="projectsImage" />
+                <ScalarProperty Name="engDescription" ColumnName="engDescription" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReadySentenses">
+            <EntityTypeMapping TypeName="ronitGoldModel.ReadySentenses">
+              <MappingFragment StoreEntitySet="ReadySentenses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="textKey" ColumnName="textKey" />
+                <ScalarProperty Name="pageID" ColumnName="pageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteMessages">
+            <EntityTypeMapping TypeName="ronitGoldModel.SiteMessages">
+              <MappingFragment StoreEntitySet="SiteMessages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="dataType" ColumnName="dataType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteMessagesToLanguages">
+            <EntityTypeMapping TypeName="ronitGoldModel.SiteMessagesToLanguages">
+              <MappingFragment StoreEntitySet="SiteMessagesToLanguages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="siteMessageID" ColumnName="siteMessageID" />
+                <ScalarProperty Name="languageID" ColumnName="languageID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Texts">
+            <EntityTypeMapping TypeName="ronitGoldModel.Texts">
+              <MappingFragment StoreEntitySet="Texts">
+                <ScalarProperty Name="imageFile" ColumnName="imageFile" />
+                <ScalarProperty Name="textID" ColumnName="textID" />
+                <ScalarProperty Name="textName" ColumnName="textName" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Theme">
+            <EntityTypeMapping TypeName="ronitGoldModel.Theme">
+              <MappingFragment StoreEntitySet="Theme">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="masterPageID" ColumnName="masterPageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThemeJS">
+            <EntityTypeMapping TypeName="ronitGoldModel.ThemeJS">
+              <MappingFragment StoreEntitySet="ThemeJS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="themeID" ColumnName="themeID" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="isInternal" ColumnName="isInternal" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThemePics">
+            <EntityTypeMapping TypeName="ronitGoldModel.ThemePics">
+              <MappingFragment StoreEntitySet="ThemePics">
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="themeID" ColumnName="themeID" />
+                <ScalarProperty Name="pageID" ColumnName="pageID" />
+                <ScalarProperty Name="imgID" ColumnName="imgID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThemeToMasters">
+            <EntityTypeMapping TypeName="ronitGoldModel.ThemeToMasters">
+              <MappingFragment StoreEntitySet="ThemeToMasters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="themeID" ColumnName="themeID" />
+                <ScalarProperty Name="masterID" ColumnName="masterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuToDomain">
+            <EntityTypeMapping TypeName="ronitGoldModel.MenuToDomain">
+              <MappingFragment StoreEntitySet="MenuToDomain">
+                <ScalarProperty Name="visibility" ColumnName="visibility" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="apperOrder" ColumnName="apperOrder" />
+                <ScalarProperty Name="isInternal" ColumnName="isInternal" />
+                <ScalarProperty Name="pageID" ColumnName="pageID" />
+                <ScalarProperty Name="menuType" ColumnName="menuType" />
+                <ScalarProperty Name="linkName" ColumnName="linkName" />
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DomainsList">
+            <EntityTypeMapping TypeName="ronitGoldModel.DomainsList">
+              <MappingFragment StoreEntitySet="DomainsList">
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="defaultPageID" ColumnName="defaultPageID" />
+                <ScalarProperty Name="languageID" ColumnName="languageID" />
+                <ScalarProperty Name="themeID" ColumnName="themeID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="ronitGoldModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="eventDate" ColumnName="eventDate" />
+                <ScalarProperty Name="eventText" ColumnName="eventText" />
+                <ScalarProperty Name="eventPlace" ColumnName="eventPlace" />
+                <ScalarProperty Name="eventName" ColumnName="eventName" />
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inProcess">
+            <EntityTypeMapping TypeName="ronitGoldModel.inProcess">
+              <MappingFragment StoreEntitySet="inProcess">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="inProcessDate" ColumnName="inProcessDate" />
+                <ScalarProperty Name="inProcessText" ColumnName="inProcessText" />
+                <ScalarProperty Name="inProcessPlace" ColumnName="inProcessPlace" />
+                <ScalarProperty Name="inProcessName" ColumnName="inProcessName" />
+                <ScalarProperty Name="inProcessID" ColumnName="inProcessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paints">
+            <EntityTypeMapping TypeName="ronitGoldModel.Paints">
+              <MappingFragment StoreEntitySet="Paints">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="isSold" ColumnName="isSold" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="isMain" ColumnName="isMain" />
+                <ScalarProperty Name="engDescription" ColumnName="engDescription" />
+                <ScalarProperty Name="engName" ColumnName="engName" />
+                <ScalarProperty Name="paintImage" ColumnName="paintImage" />
+                <ScalarProperty Name="paintSize" ColumnName="paintSize" />
+                <ScalarProperty Name="paintDescription" ColumnName="paintDescription" />
+                <ScalarProperty Name="paintName" ColumnName="paintName" />
+                <ScalarProperty Name="paintID" ColumnName="paintID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="ronitGoldModel.projects">
+              <MappingFragment StoreEntitySet="projects">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="projectsDate" ColumnName="projectsDate" />
+                <ScalarProperty Name="projectsText" ColumnName="projectsText" />
+                <ScalarProperty Name="projectsPlace" ColumnName="projectsPlace" />
+                <ScalarProperty Name="projectsName" ColumnName="projectsName" />
+                <ScalarProperty Name="projectsID" ColumnName="projectsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="ronitGoldModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="date_in" ColumnName="date_in" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="contactID" ColumnName="contactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="ronitGoldModel.Articles">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticlesPics">
+            <EntityTypeMapping TypeName="ronitGoldModel.ArticlesPics">
+              <MappingFragment StoreEntitySet="ArticlesPics">
+                <ScalarProperty Name="domainListID" ColumnName="domainListID" />
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleToArticlePics">
+            <EntityTypeMapping TypeName="ronitGoldModel.ArticleToArticlePics">
+              <MappingFragment StoreEntitySet="ArticleToArticlePics">
+                <ScalarProperty Name="dateIn" ColumnName="dateIn" />
+                <ScalarProperty Name="articlePicsID" ColumnName="articlePicsID" />
+                <ScalarProperty Name="articleID" ColumnName="articleID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

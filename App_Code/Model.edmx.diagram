@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca03489dfe6f45fab3690a5d17ea2dca" Name="Diagram1">
+        <EntityTypeShape EntityType="ronitGoldModel.Companies" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.DomainToCompanies" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.domainToReadySentense" Width="1.5" PointX="10.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.eventPics" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.inProcessPics" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.Languages" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.Masters" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.Menus" Width="1.5" PointX="15" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.Pages" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.projectsPics" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.ReadySentenses" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.SiteMessages" Width="1.5" PointX="12.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.SiteMessagesToLanguages" Width="1.5" PointX="15" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.Texts" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.Theme" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.ThemeJS" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.ThemePics" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ronitGoldModel.ThemeToMasters" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="ronitGoldModel.FK_DomainToCompanies_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_domainToReadySentense_ReadySentenses" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_SiteMessagesToLanguages_Languages" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_Theme_Masters" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_ThemeToMasters_Masters" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_Menus_Pages" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_Menus_SiteMessages" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_Menus_SiteMessages1" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_ReadySentenses_Pages" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_ThemePics_Pages" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_SiteMessagesToLanguages_SiteMessages" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_ThemeJS_Theme" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_ThemePics_Theme" ManuallyRouted="false" />
+        <AssociationConnector Association="ronitGoldModel.FK_ThemeToMasters_Theme" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ronitGoldModel.MenuToDomain" Width="1.5" PointX="18" PointY="3.625" />
+        <AssociationConnector Association="ronitGoldModel.FK_MenuToDomain_Pages" />
+        <AssociationConnector Association="ronitGoldModel.FK_MenuToDomain_SiteMessages" />
+        <EntityTypeShape EntityType="ronitGoldModel.DomainsList" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="ronitGoldModel.Events" Width="1.5" PointX="7.5" PointY="16.875" />
+        <EntityTypeShape EntityType="ronitGoldModel.inProcess" Width="1.5" PointX="7.5" PointY="24.5" />
+        <EntityTypeShape EntityType="ronitGoldModel.Paints" Width="1.5" PointX="7.5" PointY="20" />
+        <EntityTypeShape EntityType="ronitGoldModel.projects" Width="1.5" PointX="7.5" PointY="0.75" />
+        <AssociationConnector Association="ronitGoldModel.FK_DomainsList_Languages" />
+        <AssociationConnector Association="ronitGoldModel.FK_DomainsList_Theme" />
+        <AssociationConnector Association="ronitGoldModel.FK_DomainToCompanies_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_domainToReadySentense_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_Events_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_inProcess_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_MenuToDomain_Pages1" />
+        <AssociationConnector Association="ronitGoldModel.FK_Paints_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_projects_DomainsList" />
+        <EntityTypeShape EntityType="ronitGoldModel.Contacts" Width="1.5" PointX="7.5" PointY="28.25" />
+        <AssociationConnector Association="ronitGoldModel.FK_Contacts_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_inProcessPics_inProcess" />
+        <EntityTypeShape EntityType="ronitGoldModel.Articles" Width="1.5" PointX="7.5" PointY="31.5" />
+        <AssociationConnector Association="ronitGoldModel.FK_Articles_DomainsList" />
+        <EntityTypeShape EntityType="ronitGoldModel.ArticlesPics" Width="1.5" PointX="7.5" PointY="34.625" />
+        <AssociationConnector Association="ronitGoldModel.FK_ArticlesPics_DomainsList" />
+        <AssociationConnector Association="ronitGoldModel.FK_ThemePics_DomainsList" />
+        <EntityTypeShape EntityType="ronitGoldModel.ArticleToArticlePics" Width="1.5" PointX="9.75" PointY="33.125" />
+        <AssociationConnector Association="ronitGoldModel.FK_Table_1_Articles" />
+        <AssociationConnector Association="ronitGoldModel.FK_Table_1_ArticlesPics" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

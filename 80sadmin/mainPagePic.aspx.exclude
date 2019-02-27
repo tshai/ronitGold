@@ -1,0 +1,38 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/80sadmin/Admin.master" %>
+
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Data.SqlClient" %>
+<script runat="server">
+    protected void ToMainPage(object sender, CommandEventArgs e)
+    {
+        string temp = e.CommandArgument.ToString();
+        using (SqlConnection cn = Cms.connectToPainter())
+        {
+            SqlCommand com = new SqlCommand("UpdateMainPagePic", cn);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.Add("@pic", SqlDbType.VarChar, 50).Value = temp;
+            com.ExecuteNonQuery();
+            Response.Redirect("mainPagePic.aspx");
+        }
+    }
+</script>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" EnableModelValidation="True">
+        <LayoutTemplate>
+            <div id="itemPlaceholder" runat="server">
+            </div>
+        </LayoutTemplate>
+        <ItemTemplate>
+            <div style="float: right; padding: 3px; width: 120px; height: 150px; overflow: hidden;">
+                <%--<div>--%>
+                <asp:Button ID="ButtonToMainPage" runat="server" Text="לעמוד ראשי" OnCommand="ToMainPage"
+                    CommandArgument='<%#Eval("paintImage") %>' /><br />
+                <img src="../paints/thumbs/<%#Eval("paintImage") %>" alt="" />
+            </div>
+        </ItemTemplate>
+    </asp:ListView>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:paint %>"
+        SelectCommand="SELECT [paintImage] FROM [Paints]"></asp:SqlDataSource>
+</asp:Content>

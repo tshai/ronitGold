@@ -1,0 +1,94 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/80sadmin/Admin.master" %>
+
+<script runat="server">
+
+    protected void ButtonAdd_Click(object sender, EventArgs e)
+    {
+        LabelMessage.Text = PaintsClass.addNewPaint(TextBoxName.Text,TextBoxEngName.Text, TextBoxDescription.Text,TextBoxEngDescription.Text, TextBoxSize.Text, FileUploadImage,TextBoxRemarks.Text,CheckBoxisSold.Checked);
+    }
+</script>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h2>הוספת תמונה</h2>
+  <br />
+    <asp:Label ID="LabelMessage" runat="server" Text="" Font-Size="X-Large" ForeColor="#339933"></asp:Label>
+    <br />
+  <div class="formBody">
+  <div class="formRow">
+    <asp:Label ID="LabelName" runat="server" Text="שם התמונה"></asp:Label>
+    <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
+  <%--    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxName"></asp:RequiredFieldValidator>--%>
+  </div>
+  <div class="formRow">
+    <asp:Label ID="LabelEngName" runat="server" Text="שם באנגלית"></asp:Label>
+    <asp:TextBox ID="TextBoxEngName" runat="server"></asp:TextBox>
+  <%--    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxName"></asp:RequiredFieldValidator>--%>
+  </div>
+  <div class="formRow">
+    <asp:Label ID="LabelDescription" runat="server" Text="תיאור התמונה"></asp:Label>
+    <asp:TextBox ID="TextBoxDescription" runat="server" Height="150px" 
+          TextMode="MultiLine" Width="150px"></asp:TextBox>
+       <%--   <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxDescription"></asp:RequiredFieldValidator>--%>
+    </div>
+    <div class="formRow">
+    <asp:Label ID="LabelEngDescription" runat="server" Text="תיאור באנגלית"></asp:Label>
+    <asp:TextBox ID="TextBoxEngDescription" runat="server" Height="150px" 
+          TextMode="MultiLine" Width="150px"></asp:TextBox>
+       <%--   <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxDescription"></asp:RequiredFieldValidator>--%>
+    </div>
+    <div class="formRow">
+    <asp:Label ID="LabelSize" runat="server" Text="מידות"></asp:Label>
+    <asp:TextBox ID="TextBoxSize" runat="server"></asp:TextBox>
+    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxSize"></asp:RequiredFieldValidator>--%>
+     </div>
+     <div class="formRow">
+    <asp:Label ID="Label1" runat="server" Text="הערות"></asp:Label>
+    <asp:TextBox ID="TextBoxRemarks" runat="server"></asp:TextBox>
+    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxSize"></asp:RequiredFieldValidator>--%>
+     </div>
+     <div class="formRow">
+    <asp:Label ID="Label2" runat="server" Text="נמכר?"></asp:Label>
+         <asp:CheckBox ID="CheckBoxisSold" runat="server" />
+    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="TextBoxSize"></asp:RequiredFieldValidator>--%>
+     </div>
+     <div class="formRow">
+    <asp:Label ID="LabelImage" runat="server" Text="העלאת תמונה"></asp:Label>
+    <div style="float: left">
+    <asp:FileUpload ID="FileUploadImage" runat="server" />
+ <%--   <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                                      ErrorMessage="*שדה חובה"
+                                      Display="Dynamic"
+                                      ControlToValidate="FileUploadImage"></asp:RequiredFieldValidator>--%>
+     </div>
+    </div>
+     <div class="formRow">
+         <asp:Button ID="ButtonAdd" runat="server" Text="להוסיף" 
+             onclick="ButtonAdd_Click" />
+     </div>
+     </div>
+
+</asp:Content>
+

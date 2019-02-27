@@ -1,0 +1,94 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script runat="server">
+	protected void Page_Load(object sender, EventArgs e)
+	{
+		if (Session["companyID"] == null)
+		{
+			Response.Redirect("/80sadmin/adminlogin.aspx");
+		}
+		if (Request["message"] != null)
+		{
+			var message = populateClassFromDB.GetSiteMessages(int.Parse(Request.QueryString["message"].ToString()));
+			Tools.popUp(Page, message);
+		}
+	}
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+	<title></title>
+	<asp:ContentPlaceHolder ID="head" runat="server">
+	</asp:ContentPlaceHolder>
+	<style>
+		input {
+			width: 200px;
+			padding: 5px;
+			border-radius: 3px;
+			border: 1px solid #999;
+		}
+
+		.form1 {
+			display: table;
+			float: right;
+			margin-bottom: 10px;
+			width: 100%;
+			margin-right: 10px;
+		}
+
+			.form1 label {
+				width: 100px;
+				display: inline-block;
+			}
+
+		.formSection {
+			display: table;
+			margin-top: 20px;
+			border: 1px solid #c5c5c5;
+			padding: 10px;
+			background-color: #f3f3f3;
+			float: right;
+		}
+
+		table {
+			float: right;
+		}
+
+		.grid {
+			float: right;
+			width: 100%;
+			display: table;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<form id="form1" runat="server">
+		<h1>ניהול</h1>
+		<hr />
+		<div id="tabs">
+			<ul>
+				<%--				<li><a href="paints.aspx" style="background-color: green"><span>רשימת תמונות</span></a></li>--%>
+				<%--<li><a href="mainPagePic.aspx" style="background-color: green"><span>תמונה לעמוד הראשי</span></a></li>--%>
+				<%--				<li><a href="addPaint.aspx" style="background-color: green"><span>הוספת תמונה</span></a></li>--%>
+				<li><a href="projects.aspx" style="background-color: black"><span><%=populateClassFromDB.GetSiteMessagesByKey("project") %></span></a></li>
+				<%--<li><a href="addProjects.aspx" style="background-color: black"><span>הוספת גלריית פרוייקטים</span></a></li>--%>
+				<li><a href="inProcess.aspx" style="background-color: red"><span><%=populateClassFromDB.GetSiteMessagesByKey("inProgress") %></span></a></li>
+				<%--<li><a href="addInProcess.aspx" style="background-color: red"><span>הוספת בתהליך עבודה</span></a></li>--%>
+				<li><a href="events.aspx" style="background-color: blue"><span><%=populateClassFromDB.GetSiteMessagesByKey("events") %></span></a></li>
+				<li><a href="articles.aspx" style="background-color: blue"><span><%=populateClassFromDB.GetSiteMessagesByKey("Articles") %></span></a></li>
+				<li><a href="menuOrders.aspx" style="background-color: blue"><span><%=populateClassFromDB.GetSiteMessagesByKey("menuAppears") %></span></a></li>
+				<%--				<li><a href="addEvents.aspx" style="background-color: blue"><span>הוספת הדמיות</span></a></li>--%>
+				<li><a href="editAbout.aspx" style="background-color: purple"><span><%=populateClassFromDB.GetSiteMessagesByKey("about") %></span></a></li>
+				<li><a href="contacts.aspx" style="background-color: purple"><span><%=populateClassFromDB.GetSiteMessagesByKey("contactChat") %></span></a></li>
+				<li><a href="/default.aspx" style="background-color: purple"><span><%=populateClassFromDB.GetSiteMessagesByKey("companyWebSite") %></span></a></li>
+				<li><a href="logOff.aspx" style="background-color: purple"><span><%=populateClassFromDB.GetSiteMessagesByKey("LogOut") %></span></a></li>
+			</ul>
+		</div>
+		<%--<div>--%>
+		<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+		</asp:ContentPlaceHolder>
+		<%--</div>--%>
+	</form>
+</body>
+</html>

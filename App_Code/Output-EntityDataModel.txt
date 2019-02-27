@@ -1,0 +1,50 @@
+﻿Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.4548481.
+Generating the model took 00:00:01.4312723.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:00.8773358.
+Generating the model took 00:00:00.9789275.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1577645.
+Generating the model took 00:00:01.0694283.
+Successfully registered the build provider in the Web.Config file.
+Could not save the XML to the configuration file 'C:\wwwROOT\ronitgold\web.config' because of the error 'The process cannot access the file 'C:\wwwROOT\ronitgold\web.config' because it is being used by another process.'.
+Unable to register the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file because of the following exception: 'The process cannot access the file 'C:\wwwROOT\ronitgold\web.config' because it is being used by another process.'
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1342601.
+Generating the model took 00:00:00.8886176.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.0015041.
+Generating the model took 00:00:00.9833943.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.0365121.
+Generating the model took 00:00:02.0806532.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Writing the .edmx file took 00:00:00.0188708.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.0263808.
+Generating the model took 00:00:00.9444522.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Writing the .edmx file took 00:00:00.0181056.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:00.9907169.
+Generating the model took 00:00:01.0208594.
+Successfully registered the build provider in the Web.Config file.
+Successfully registered the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file.
+Writing the .edmx file took 00:00:00.0156937.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:00.9022520.
+Generating the model took 00:00:00.9744741.
+Successfully registered the build provider in the Web.Config file.
+Could not save the XML to the configuration file 'C:\wwwROOT\ronitgold\web.config' because of the error 'The process cannot access the file 'C:\wwwROOT\ronitgold\web.config' because it is being used by another process.'.
+Unable to register the assembly 'System.Data.Entity.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' in the Web.Config file because of the following exception: 'The process cannot access the file 'C:\wwwROOT\ronitgold\web.config' because it is being used by another process.'

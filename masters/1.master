@@ -1,0 +1,613 @@
+﻿<%@ Master Language="C#" %>
+
+<%@ Import Namespace="System.Data.Entity" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+
+<!DOCTYPE html>
+
+<script runat="server">
+	string jsList;
+	List<ThemePics> themePics;
+	string direction;
+	string textAlign;
+	bool isAdmin;
+	protected void Page_Load(object sender, EventArgs e)
+	{
+		direction = populateClassFromDB.getSiteDirectionByLanguageID(int.Parse(HttpContext.Current.Session["languageID"].ToString()));
+		textAlign = populateClassFromDB.getTextAlignByDirection(direction);
+		var sb = new StringBuilder();
+		var domain = populateClassFromDB.getDomainByUrl(Request.Url.Host.Replace("www.", ""));
+		using (var db = new Entities())
+		{
+			var themeJSFiles = (from a in db.ThemeJS where a.themeID == domain.themeID && a.isActive == 1 select a).ToList();
+			foreach (var item in themeJSFiles)
+			{
+				if (item.isInternal == 0)
+				{
+					sb.Append(string.Concat("<script src='/App_Themes/1/js/", item.fileName, "'></", "script>"));
+				}
+				else
+				{
+					sb.Append(string.Concat("<script src='", item.fileName, "'></", "script>"));
+				}
+			}
+			jsList = sb.ToString();
+		}
+		var themeID = populateClassFromDB.getThemeById(populateClassFromDB.getDomainByUrl(Request.Url.Host.Replace("www.", "")).themeID).ID;
+		themePics = new List<ThemePics>();
+		using (var db = new Entities())
+		{
+			themePics = (from a in db.ThemePics where a.themeID == themeID select a).ToList();
+
+		}
+		logo.Src = "/media/paints/large/" + domain.logo;
+		logoFooter.Src = "/media/paints/large/" + domain.logo;
+		if (Session["companyID"] != null)
+		{
+			isAdmin = true;
+		}
+		else
+		{
+			isAdmin = false;
+		}
+	}
+
+	public string RemoveLandingZero(string text)
+	{
+		if (text[0] == '0')
+		{
+			return text.Substring(1);
+		}
+		return text;
+	}
+</script>
+
+<html>
+<head runat="server">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<title>Home</title>
+	<asp:PlaceHolder ID="PlaceHolder1" runat="server">
+		<%=jsList %>
+	
+	</asp:PlaceHolder>
+	<meta charset="UTF-8">
+	<%--<link rel="shortcut icon" id="2" />--%>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<asp:ContentPlaceHolder ID="head" runat="server">
+	</asp:ContentPlaceHolder>
+	<!-- count particles -->
+	<style>
+		#preloader2 {
+			display: none;
+			z-index: 1000;
+			position: fixed;
+			width: 100%;
+			height: 4000px;
+			background-color: #000;
+			text-align: center;
+			padding-top: 50vh;
+		}
+
+		.saveButtonLogo {
+			height: 16px;
+			margin-right: 5px;
+			background-color: gray;
+			color: white;
+			padding: 3px;
+			font-size: 10px;
+			font-size: 10px;
+			text-align: center;
+			line-height: 12px;
+			cursor: pointer;
+		}
+
+		.buttonsGroupFooter {
+			display: none;
+		}
+
+		input[type=color] {
+			padding: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div id="preloader2">
+		<img src="/media/0_JVdgKzSfU4q4psf6.gif" />
+	</div>
+	<script type="text/javascript">
+		<%--$(document).ready(function () {
+			var picsIDs = JSON.parse('[' + '<%=string.Join(",", themePics.Select(x => x.ID))%>' + ']');
+			var picsFileNames = '<%=string.Join(",", themePics.Select(x => x.fileName))%>';
+			picsFileNames = picsFileNames.split(",");
+			for (var i = 0; i < picsIDs.length; i++) {
+				document.getElementById(picsIDs[i]).src = "/App_Themes/1/img/logos/" + picsFileNames[i];
+			}
+		});--%>
+		$(document).ready(function () {
+			var isAdmin = '<%=isAdmin%>';
+			var editBoxes = document.getElementsByClassName('editBox');
+			if (isAdmin == 'True') {
+				for (var i = 0; i < editBoxes.length; i++) {
+					editBoxes[i].style.display = "inline-flex;";
+				}
+			}
+			else {
+				for (var i = 0; i < editBoxes.length; i++) {
+					editBoxes[i].style.display = "none";
+				}
+			}
+
+			$("#blackScreen").click(function () {
+				$("#blackScreen").hide();
+				$("*").removeClass("frontClass");
+				$(".inputText").css("display", "none");
+				$(".inputTextFooter").css("display", "none");
+				$(".inputTextHeader").css("display", "none");
+				$(".buttonsGroup").css("display", "none");
+				$(".buttonsGroupFooter").css("display", "none");
+				$(".saveButton").css("display", "none");
+				$(".saveButtonText").css("display", "none");
+				$(".saveButtonTextFooter").css("display", "none");
+				$(".saveButtonTextHeader").css("display", "none");
+				$(".saveButtonLogo").css("display", "none");
+				$(".leftText").css("margin-right", "0px");
+				$(".footerLeft").css("margin-right", "0px");
+			})
+		});
+
+		$(document).ready(function () {
+			$(".saveButtonFooter").css("display", "none");
+			$(".saveButtonTextFooter").css("display", "none");
+			$(".inputTextFooter").css("display", "none");
+			$(".saveButtonHeader").css("display", "none");
+			$(".saveButtonTextHeader").css("display", "none");
+			$(".inputTextHeader").css("display", "none");
+			$(".saveButtonLogo").css("display", "none");
+		});
+
+		function readURL(input, id) {
+			if (input.files[0].type.includes('image')) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+
+					reader.onload = function (e) {
+
+						$("#" + id)
+							.attr('src', e.target.result);
+						$("#" + id).show();
+					};
+
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+		}
+
+		function showUpload(id) {
+			$("#" + id).show();
+		}
+
+		function fileUpload(id) {
+			$("#" + id).click();
+		}
+
+		function makeXMLHttpRequest(url, data, callback) {
+			var request = new XMLHttpRequest();
+			request.onreadystatechange = function () {
+				if (data.has("file")) {
+					$("#preloader2").show();
+				}
+				if (request.readyState == 4 && request.status == 200) {
+					if (request.responseText === 'success') {
+						alert("<%=populateClassFromDB.GetSiteMessagesByKey("PicUploadSuccess")%>");
+						$("#preloader2").hide();
+						//callback('upload-ended');
+						return;
+					}
+				}
+			};
+
+			request.open('POST', url);
+			request.send(data);
+		}
+
+		function showTextInDiv(inputID, divID) {
+			var inputBox = document.getElementById(inputID);
+			document.getElementById(divID).innerHTML = inputBox.textContent;
+		}
+
+		function showHeaderInDiv(inputID, div) {
+			var inputBox = document.getElementById(inputID);
+			document.getElementById(div.id).innerHTML = inputBox.value;
+		}
+
+		function doBlackTextFooter(item, index, textItem) {
+			$("#blackScreen").show();
+			$("#" + item + "").addClass("frontClass");
+			if (document.getElementsByClassName('buttonsGroupFooter')[index] != undefined) {
+				document.getElementsByClassName('buttonsGroupFooter')[index].style.display = "-webkit-box";
+				$(".footerLeft").css("margin-right", "-100px");
+			}
+			document.getElementsByClassName('saveButtonTextFooter')[index].style.display = "block";
+			document.getElementsByClassName('inputTextFooter')[index].style.display = "block";
+			document.getElementsByClassName('inputTextFooter')[index].textContent = $('#' + textItem).text();
+		}
+
+		function doBlackTextHeader(item, index, textItem) {
+			$("#blackScreen").show();
+			$("#" + item.id + "").addClass("frontClass");
+			document.getElementsByClassName('saveButtonTextHeader')[index].style.display = "block";
+			document.getElementsByClassName('inputTextHeader')[index].style.display = "block";
+			document.getElementsByClassName('inputTextHeader')[index].value = $('#' + textItem.id).text();
+		}
+
+		function doBlackLogo(item) {
+			$("#blackScreen").show();
+			$("#" + item + "").addClass("frontClass");
+			$(".saveButtonLogo").css("display", "block");
+		}
+
+		function saveTextFromFooterToDb(id) {
+			$("#blackScreen").hide();
+			$("*").removeClass("frontClass");
+			$(".inputTextFooter").css("display", "none");
+			$(".saveButtonTextFooter").css("display", "none");
+			$(".buttonsGroupFooter").css("display", "none");
+			$(".footerLeft").css("margin-right", "0px");
+			var array = id.split('_');
+			var textID = array[array.length - 1];
+			var formData = new FormData();
+			formData.append('textKey', textID);
+			if ($('#' + id).text() != "") {
+				formData.append('newText', $('#' + id).text());
+			}
+			else if ($('#' + id).val() != "") {
+				formData.append('newText', $('#' + id).val());
+			}
+			else {
+				formData.append('newText', $('#' + id).val());
+			}
+			makeXMLHttpRequest('/80sadmin/Api.aspx?qType=2', formData, function (callback) {
+			});
+		}
+
+		function saveTextFromHeaderToDb(menuToDomainID, newText) {
+			$("#blackScreen").hide();
+			$("*").removeClass("frontClass");
+			$(".inputTextHeader").css("display", "none");
+			$(".saveButtonTextHeader").css("display", "none");
+			var formData = new FormData();
+			formData.append('menuToDomainID', menuToDomainID);
+			formData.append('newText', newText);
+
+			makeXMLHttpRequest('/80sadmin/Api.aspx?qType=3', formData, function (callback) {
+			});
+		}
+
+		function saveLogoToDb(id) {
+			$("#blackScreen").hide();
+			$("*").removeClass("frontClass");
+			$(".saveButtonLogo").css("display", "none");
+			var formData = new FormData();
+			formData.append('file', $("#" + id)["0"].files["0"]);
+
+			makeXMLHttpRequest('/80sadmin/Api.aspx?qType=5', formData, function (callback) {
+			});
+		}
+	</script>
+	<style>
+		body {
+			direction: <%=direction%>;
+			text-align: <%=textAlign%>;
+		}
+
+		.galleryContainer {
+			float: <%=textAlign%>;
+		}
+	</style>
+	<form id="form1" runat="server">
+		<div id="preloader">
+			<div class="spinner">
+				<div class="cube1"></div>
+				<div class="cube2"></div>
+			</div>
+		</div>
+		<!-- Preloader End -->
+
+		<!-- Navbar START -->
+		<header>
+			<nav class="navbar navbar-default navbar-custom" data-spy="affix" data-offset-top="20">
+				<div class="container">
+					<div class="row">
+						<div class="navbar-header navbar-header-custom">
+							<button type="button" class="navbar-toggle collapsed menu-icon" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<div id="divImageLogo1">
+								<div class="editBox">
+									<div onclick="fileUpload('uploadLogoFile1'); doBlackLogo('divImageLogo1')"><i class='fa fa-pencil-square-o' aria-hidden='true'></i></div>
+									<input id="uploadLogoFile1" type="file" style="display: none" onchange="readURL(this, '<%=logo.ClientID %>');" />
+									<div class="saveButtonLogo" onclick="saveLogoToDb('uploadLogoFile1')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+								</div>
+								<a class="navbar-logo" href="/">
+									<img id="logo" alt="logo" runat="server"></a>
+							</div>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right navbar-links-custom">
+								<%=populateClassFromDB.generateMenu(populateClassFromDB.GetMenuByDomainID(int.Parse(Session["domainListID"].ToString()),1609)) %>
+
+								<%--<li>
+									<a href="../DefaultPages/1.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("Main") %></a>
+								</li>
+								<li>
+									<a href="../main/Projects.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("projects") %></a>
+								</li>
+								<li>
+									<a href="../main/About.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("about") %></a>
+								</li>
+								<li>
+									<a href="../main/InProcess.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("workProcess") %></a>
+								</li>
+								<li>
+									<a href="../main/Events.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("pictures") %></a>
+								</li>
+								<li>
+									<a href="../main/ContactUs.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("ContactUs") %></a>
+								</li>--%>
+
+								<!-- Search Button START -->
+								<%--<li class="search-holder">
+									<span class="search-button" id="opennav">
+										<i class="fa fa-search" aria-hidden="true"></i>
+									</span>
+								</li>--%>
+								<!-- Search Button END -->
+							</ul>
+							<!-- Search Overlay START -->
+							<%--<div id="search_nav" class="search-overlay">
+								<a href="javascript:void(0)" class="closebtn" id="closenav">&times;</a>
+								<div class="search-overlay-content">
+									<form method="get">
+										<input type="text" placeholder="Search ...">
+									</form>
+								</div>
+							</div>--%>
+							<!-- Search Overlay END -->
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<!-- Navbar END -->
+
+		<!-- Scroll to top button Start -->
+		<a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+		<div>
+			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+			</asp:ContentPlaceHolder>
+		</div>
+
+
+		<footer>
+			<div id="particles-js-footer" style="height: 150px;"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<a href="#">
+							<img id="logoFooter" alt="img" runat="server"></a>
+						<div id="footerTextDiv">
+							<div class="editBox editText footerLeft" id="divTextFooter1">
+								<div onclick="doBlackTextFooter('divTextFooter1', 0, 'pFooter1')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+								<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=footerText.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+								<%--<input type="text" id="footerText" onkeyup="showTextInDiv(this.id, 'pFooter1')" class="inputTextFooter" runat="server" />--%>
+								<div>
+									<div class="buttonsGroupFooter">
+										<div class="textButtons" title="bold" onclick="document.execCommand('bold');" onmousedown="event.preventDefault();"><i class="fa fa-bold"></i></div>
+										<div class="textButtons" title="italic" onclick="document.execCommand('italic')" onmousedown="event.preventDefault();"><i class="fa fa-italic"></i></div>
+										<div class="textButtons" title="underline" onclick="document.execCommand('underline')" onmousedown="event.preventDefault();"><i class="fa fa-underline"></i></div>
+										<div class="borders"></div>
+										<div class="textButtons" title="increase text" id="increase" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="decrease text" id="decrease" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="text color" style="padding-top: 0px;">
+											<input type="color" value="#000000" onchange="changeColor(this)" />
+										</div>
+										<div class="borders"></div>
+										<div class="textButtons" title="link" onclick="addLink()" onmousedown="event.preventDefault();"><i class="fa fa-paperclip"></i></div>
+									</div>
+									<div id="footerText" class="content inputTextFooter" contenteditable="true" runat="server" onkeyup="showTextInDiv(this.id, 'pFooter1')"></div>
+								</div>
+							</div>
+							<p id="pFooter1"><%=populateClassFromDB.getReadySentencesFromDomain(8, "footerText") %></p>
+							<p>© Copyright 2017 SpecThemes. All Rights reserved</p>
+							<a id="createdBy" href='http://ask-us.co.il/'><%=populateClassFromDB.GetSiteMessagesByKey("createdByAsk") %></a>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12">
+						<div class="footer-title">
+							<h2><%=populateClassFromDB.GetSiteMessagesByKey("siteMap") %></h2>
+						</div>
+						<ul>
+							<li>
+								<a href="../DefaultPages/1.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("Main") %></a>
+							</li>
+							<li>
+								<a href="../main/Projects.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("projects") %></a>
+							</li>
+							<li>
+								<a href="../main/About.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("about") %></a>
+							</li>
+							<li>
+								<a href="../main/InProcess.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("workProcess") %></a>
+							</li>
+							<li>
+								<a href="../main/Events.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("pictures") %></a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12">
+						<div class="footer-title">
+							<h2><%=populateClassFromDB.GetSiteMessagesByKey("ContactUs") %>
+							</h2>
+						</div>
+						<ul>
+							<li><a href="../main/ContactUs.aspx"><%=populateClassFromDB.GetSiteMessagesByKey("supportCenter") %></a></li>
+							<li><%=populateClassFromDB.GetSiteMessagesByKey("callUs") %></li>
+							<div class="editBox editText" id="divTextFooter2">
+								<div onclick="doBlackTextFooter('divTextFooter2', 1, 'li1')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+								<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=phoneNum1.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+								<%--<input type="text" id="phoneNum1" onkeyup="showTextInDiv(this.id, 'li1')" class="inputTextFooter" runat="server" />--%>
+								<div>
+									<div class="buttonsGroupFooter">
+										<div class="textButtons" title="bold" onclick="document.execCommand('bold');" onmousedown="event.preventDefault();"><i class="fa fa-bold"></i></div>
+										<div class="textButtons" title="italic" onclick="document.execCommand('italic')" onmousedown="event.preventDefault();"><i class="fa fa-italic"></i></div>
+										<div class="textButtons" title="underline" onclick="document.execCommand('underline')" onmousedown="event.preventDefault();"><i class="fa fa-underline"></i></div>
+										<div class="borders"></div>
+										<div class="textButtons" title="increase text" id="increase" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="decrease text" id="decrease" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="text color" style="padding-top: 0px;">
+											<input type="color" value="#000000" onchange="changeColor(this)" />
+										</div>
+										<div class="borders"></div>
+										<div class="textButtons" title="link" onclick="addLink()" onmousedown="event.preventDefault();"><i class="fa fa-paperclip"></i></div>
+									</div>
+									<div id="phoneNum1" class="content inputTextFooter" contenteditable="true" runat="server" onkeyup="showTextInDiv(this.id, 'li1')"></div>
+								</div>
+							</div>
+							<li id="li1"><a href="tel:+972<%=RemoveLandingZero(populateClassFromDB.getReadySentencesFromDomain(8, "phoneNum1"))%>"><%=populateClassFromDB.getReadySentencesFromDomain(8, "phoneNum1") %></a></li>
+							<div class="editBox editText" id="divTextFooter3">
+								<div onclick="doBlackTextFooter('divTextFooter3', 2, 'li2')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+								<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=phoneNum2.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+								<%--<input type="text" id="phoneNum2" onkeyup="showTextInDiv(this.id, 'li2')" class="inputTextFooter" runat="server" />--%>
+								<div>
+									<div class="buttonsGroupFooter">
+										<div class="textButtons" title="bold" onclick="document.execCommand('bold');" onmousedown="event.preventDefault();"><i class="fa fa-bold"></i></div>
+										<div class="textButtons" title="italic" onclick="document.execCommand('italic')" onmousedown="event.preventDefault();"><i class="fa fa-italic"></i></div>
+										<div class="textButtons" title="underline" onclick="document.execCommand('underline')" onmousedown="event.preventDefault();"><i class="fa fa-underline"></i></div>
+										<div class="borders"></div>
+										<div class="textButtons" title="increase text" id="increase" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="decrease text" id="decrease" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="text color" style="padding-top: 0px;">
+											<input type="color" value="#000000" onchange="changeColor(this)" />
+										</div>
+										<div class="borders"></div>
+										<div class="textButtons" title="link" onclick="addLink()" onmousedown="event.preventDefault();"><i class="fa fa-paperclip"></i></div>
+									</div>
+									<div id="phoneNum2" class="content inputTextFooter" contenteditable="true" runat="server" onkeyup="showTextInDiv(this.id, 'li2')"></div>
+								</div>
+							</div>
+							<li id="li2"><a href="tel:+972<%=RemoveLandingZero(populateClassFromDB.getReadySentencesFromDomain(8, "phoneNum2")) %>"><%=populateClassFromDB.getReadySentencesFromDomain(8, "phoneNum2") %></a></li>
+							<li><%=populateClassFromDB.GetSiteMessagesByKey("mailUs") %></li>
+							<div class="editBox editText" id="divTextFooter4">
+								<div onclick="doBlackTextFooter('divTextFooter4', 3, 'li3')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+								<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=email.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+								<%--<input type="text" id="email" onkeyup="showTextInDiv(this.id, 'li3')" class="inputTextFooter" runat="server" />--%>
+								<div>
+									<div class="buttonsGroupFooter">
+										<div class="textButtons" title="bold" onclick="document.execCommand('bold');" onmousedown="event.preventDefault();"><i class="fa fa-bold"></i></div>
+										<div class="textButtons" title="italic" onclick="document.execCommand('italic')" onmousedown="event.preventDefault();"><i class="fa fa-italic"></i></div>
+										<div class="textButtons" title="underline" onclick="document.execCommand('underline')" onmousedown="event.preventDefault();"><i class="fa fa-underline"></i></div>
+										<div class="borders"></div>
+										<div class="textButtons" title="increase text" id="increase" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="decrease text" id="decrease" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="text color" style="padding-top: 0px;">
+											<input type="color" value="#000000" onchange="changeColor(this)" />
+										</div>
+										<div class="borders"></div>
+										<div class="textButtons" title="link" onclick="addLink()" onmousedown="event.preventDefault();"><i class="fa fa-paperclip"></i></div>
+									</div>
+									<div id="email" class="content inputTextFooter" contenteditable="true" runat="server" onkeyup="showTextInDiv(this.id, 'li3')"></div>
+								</div>
+							</div>
+							<li id="li3"><%=populateClassFromDB.getReadySentencesFromDomain(8, "email") %></li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12">
+						<div class="footer-title">
+							<h2><%=populateClassFromDB.GetSiteMessagesByKey("visitUs") %></h2>
+						</div>
+						<ul>
+							<li><%=populateClassFromDB.GetSiteMessagesByKey("ourLocation") %></li>
+							<div class="editBox editText" id="divTextFooter5">
+								<div onclick="doBlackTextFooter('divTextFooter5', 4, 'li4')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+								<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=location.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+								<%--<input type="text" id="location" onkeyup="showTextInDiv(this.id, 'li4')" class="inputTextFooter" runat="server" />--%>
+								<div>
+									<div class="buttonsGroupFooter">
+										<div class="textButtons" title="bold" onclick="document.execCommand('bold');" onmousedown="event.preventDefault();"><i class="fa fa-bold"></i></div>
+										<div class="textButtons" title="italic" onclick="document.execCommand('italic')" onmousedown="event.preventDefault();"><i class="fa fa-italic"></i></div>
+										<div class="textButtons" title="underline" onclick="document.execCommand('underline')" onmousedown="event.preventDefault();"><i class="fa fa-underline"></i></div>
+										<div class="borders"></div>
+										<div class="textButtons" title="increase text" id="increase" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="decrease text" id="decrease" onmousedown="event.preventDefault();"><i class="fa fa-font"></i></div>
+										<div class="textButtons" title="text color" style="padding-top: 0px;">
+											<input type="color" value="#000000" onchange="changeColor(this)" />
+										</div>
+										<div class="borders"></div>
+										<div class="textButtons" title="link" onclick="addLink()" onmousedown="event.preventDefault();"><i class="fa fa-paperclip"></i></div>
+									</div>
+									<div id="location" class="content inputTextFooter" contenteditable="true" runat="server" onkeyup="showTextInDiv(this.id, 'li3')"></div>
+								</div>
+							</div>
+							<li id="li4"><%=populateClassFromDB.getReadySentencesFromDomain(8, "location") %></li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-4 col-xs-12">
+						<div class="footer-title">
+							<h2><%=populateClassFromDB.GetSiteMessagesByKey("SocialProfile") %></h2>
+						</div>
+						<%--	<form method="get">
+							<input type="text" name="s" placeholder="Search ...">
+						</form>--%>
+						<div class="mt-50 center-holder" style="display: flex;">
+							<div class="socialMedia">
+								<div class="editBox editText" id="divTextFooter6">
+									<div onclick="doBlackTextFooter('divTextFooter6', 5, 'facebook')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+									<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=facebook1.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+									<input type="text" id="facebook1" class="inputTextFooter" runat="server" />
+								</div>
+								<a id="facebook" href='<%=populateClassFromDB.getReadySentencesFromDomain(8, "facebook1") %>'><i class="fa fa-facebook"></i></a>
+							</div>
+							<div class="socialMedia">
+								<div class="editBox editText" id="divTextFooter7">
+									<div onclick="doBlackTextFooter('divTextFooter7', 6, 'instagram')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+									<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=instagram1.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+									<input type="text" id="instagram1" class="inputTextFooter" runat="server" />
+								</div>
+								<a id="instagram" href='<%=populateClassFromDB.getReadySentencesFromDomain(8, "instagram1") %>'><i class="fa fa-instagram"></i></a>
+							</div>
+							<div class="socialMedia">
+								<div class="editBox editText" id="divTextFooter8">
+									<div onclick="doBlackTextFooter('divTextFooter8', 7, 'twitter')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+									<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=twitter1.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+									<input type="text" id="twitter1" class="inputTextFooter" runat="server" />
+								</div>
+								<a id="twitter" href='<%=populateClassFromDB.getReadySentencesFromDomain(8, "twitter1") %>'><i class="fa fa-twitter"></i></a>
+							</div>
+							<div class="socialMedia">
+								<div class="editBox editText" id="divTextFooter9">
+									<div onclick="doBlackTextFooter('divTextFooter9', 8, 'youtube')"><i class='fa fa-pencil-square-o white' aria-hidden='true'></i></div>
+									<div class="saveButtonTextFooter" onclick="saveTextFromFooterToDb('<%=youtube1.ClientID %>')"><%=populateClassFromDB.GetSiteMessagesByKey("Save") %></div>
+									<input type="text" id="youtube1" class="inputTextFooter" runat="server" />
+								</div>
+								<a id="youtube" href='<%=populateClassFromDB.getReadySentencesFromDomain(8, "youtube1") %>'><i class="fa fa-youtube"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer START -->
+		<div id="blackScreen"></div>
+	</form>
+</body>
+</html>
